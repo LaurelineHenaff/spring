@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="css/style.css" rel="stylesheet" />
 <title>JSP - Activité 1 - Livres</title>
 </head>
 <body>
@@ -15,26 +16,25 @@
 Les livres sont : <br><br>
 <%
   Collection<LivreModel> livres = (Collection<LivreModel>)request.getAttribute("livres");
-  out.print("<table style='border='1px solid black;''>");
-  out.print("<tr><th>Id</th><th>Titre</th><th>Langue</th><th></th></tr>");
+  out.print("<table>");
+  out.print("<tr><th>Id</th><th>Titre</th><th>Langue</th><th>Modification/Suppression</th></tr>");
   for (LivreModel l : livres){
     out.print("<tr>");
     
     // Afficher le livre
-    out.print("<td style='text-align='center;''>" + l.getId() + "</td>");
-    out.print("<td style='align='center; width='200px;''>" + l.getTitre() + "</td>");
-    out.print("<td style='text-align='center;''>" + l.getLangue() + "</td>");
+    out.print("<td>" + l.getId() + "</td>");
+    out.print("<td>" + l.getTitre() + "</td>");
+    out.print("<td>" + l.getLangue() + "</td>");
     
     // Bouton modifier
     out.print("<form method=GET action='livres-form'>");
-    out.print("<td><input type='hidden' name='id' value="+ l.getId() +" />");
+    out.print("<input type='hidden' name='id' value="+ l.getId() +" />");
     out.print("<input type='hidden' name='titre' value="+ l.getTitre() +" />");
-    out.print("<input type='hidden' name='langue' value="+ l.getLangue() +" /></td>");
-    out.print("<td><input type='submit' value='Modifier' /></td>");
+    out.print("<input type='hidden' name='langue' value="+ l.getLangue() +" />");
+    out.print("<td><input type='submit' value='Modifier' />");
     out.print("</form>");
     
     // Bouton effacer
-    out.print("<td>");
     out.print("<form method=POST action='livres-delete/" + l.getId() + "'>");
     out.print("<input type='submit' value='Effacer' />");
     out.print("</form></td>");
